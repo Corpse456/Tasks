@@ -9,7 +9,7 @@ public class NumberGuessing {
     private static int count;
     
     public static void main(String[] args) {
-        int max = 100000000;
+        int max = 10;
         for (int i = 1; i < max; i++) {
             realAnswer = i;
             count = 0;
@@ -17,7 +17,7 @@ public class NumberGuessing {
             b = max;
             trying(i);
             int percent = max / 100;
-            if (i % percent == 0) {
+            if (max > 100 && i % percent == 0) {
                 System.out.println(i / percent);
             }
         }
@@ -56,7 +56,7 @@ public class NumberGuessing {
     
     private static boolean correct(String check, int i) {
         if ("CORRECT".equals(check)) {
-            //System.out.println(i + ": Yept!");
+            System.out.println(i + ": Yept!");
             return true;
         }
         else if ("TOO_BIG".equals(check)) {
