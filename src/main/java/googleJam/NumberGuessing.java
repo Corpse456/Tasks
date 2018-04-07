@@ -22,7 +22,7 @@ public class NumberGuessing {
     private static int answer;
     private static int count;
 
-    public static void main(String[] args) {
+    public static void main (String[] args) {
         int max = 10;
         for (int i = 1; i < max; i++) {
             realAnswer = i;
@@ -37,7 +37,7 @@ public class NumberGuessing {
         }
     }
 
-    private static void trying(int i) {
+    private static void trying (int i) {
         boolean find = false;
         do {
             answer = findNumber(a, b);
@@ -51,30 +51,25 @@ public class NumberGuessing {
         }
     }
 
-    private static int findNumber(int a, int b) {
+    private static int findNumber (int a, int b) {
         /*
          * System.out.printf("a: %d| b: %d\t",a,b); System.out.println(++count);
          */
         count++;
-        if (b == a + 1)
-            return b;
+        if (b == a + 1) return b;
 
         answer = (a + b) / 2;
         return answer + 1;
     }
 
-    private static String check(int answer) {
-        if (answer == realAnswer)
-            return "CORRECT";
-        else if (answer > realAnswer)
-            return "TOO_BIG";
-        else if (answer < realAnswer)
-            return "TOO_SMALL";
-        else
-            return "WRONG_ANSWER";
+    private static String check (int answer) {
+        if (answer == realAnswer) return "CORRECT";
+        else if (answer > realAnswer) return "TOO_BIG";
+        else if (answer < realAnswer) return "TOO_SMALL";
+        else return "WRONG_ANSWER";
     }
 
-    private static boolean correct(String check, int i) {
+    private static boolean correct (String check, int i) {
         if ("CORRECT".equals(check)) {
             System.out.println(i + ": Yept!");
             return true;

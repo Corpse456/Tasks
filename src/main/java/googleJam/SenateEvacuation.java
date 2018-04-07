@@ -13,20 +13,22 @@
  For each test case, output one line containing Case #x: y, where x is the test case number (starting from 1) and y is the evacuation plan. The plan must be a space-separated list of instructions, in the order in which they are to be carried out, where each instruction is either one or two characters, representing the parties of the senators to evacuate in each step.
  It is guaranteed that at least one valid evacuation plan will exist. If multiple evacuation plans are valid, you may output any of them.
  */
+package googleJam;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
-public class Main {
+public class SenateEvacuation {
     private static HashMap<Character, Integer> senat = new HashMap<>();
 
-    public static void main(String[] args) {
-        int[] amounts = {3, 1, 2, 10, 6, 4, 4, 8, 6, 4, 9, 3, 40};
+    public static void main (String[] args) {
+        int[] amounts = { 3, 1, 2, 10, 6, 4, 4, 8, 6, 4, 9, 3, 40 };
         senatorSaving(amounts);
     }
 
-    private static void senatorSaving(int[] amounts) {
+    private static void senatorSaving (int[] amounts) {
         ArrayList<String> plan = new ArrayList<String>();
 
         for (int i = 0; i < amounts.length; i++) {
@@ -51,14 +53,14 @@ public class Main {
         System.out.println(plan);
     }
 
-    private static void exit(Character key) {
+    private static void exit (Character key) {
         int amount = senat.get(key);
 
         if (amount == 1) senat.remove(key);
         else senat.put(key, amount - 1);
     }
 
-    private static String secondMan() {
+    private static String secondMan () {
         if (senat.size() > 2 || senat.size() == 1) {
             Character key = maxFinder();
             exit(key);
@@ -74,7 +76,7 @@ public class Main {
         return key + "";
     }
 
-    private static Character maxFinder() {
+    private static Character maxFinder () {
         int max = 0;
         Character letter = null;
         for (Entry<Character, Integer> entry : senat.entrySet()) {
@@ -86,7 +88,7 @@ public class Main {
         return letter;
     }
 
-    private static void check() {
+    private static void check () {
         List<Integer> valueList = new ArrayList<>(senat.values());
 
         int sum = 0;
@@ -100,4 +102,3 @@ public class Main {
         }
     }
 }
-
