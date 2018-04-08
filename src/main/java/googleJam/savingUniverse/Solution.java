@@ -39,28 +39,44 @@ In Sample Case #6, five hacks are required. Notice that even if two hacks swap t
 */
 package googleJam.savingUniverse;
 
+import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
 public class Solution {
-    public static void main (String[] args) {
-        soulutionExtractor();
-    }
-
-    private static int soulutionExtractor () {
-        int attempt = 0;
-        int maxDamage = 6;
-        String prog = "SCCSSC";
-        char[] program = prog.toCharArray();
-
-        int damage = calculateDamage(program);
-
-        while (damage < maxDamage) {
-            swap(program);
-            damage = calculateDamage(program);
+    
+    private static char[] program;
+    
+    public static void main (String[] args) throws FileNotFoundException {
+        // in = new Scanner(new BufferedReader(new InputStreamReader(System.in)));
+        Scanner in = new Scanner(new BufferedReader(new FileReader("C:/universe.txt")));
+        int t = in.nextInt(); 
+        
+        for (int i = 1; i <= t; ++i) {
+            String result = solution(in);
+            System.out.println("Case #" + i + ": " + result);
         }
-
-        return attempt;
+        in.close();
     }
 
-    private static int calculateDamage (char[] program) {
+    private static String solution (Scanner in) {
+        int attempt = 0;
+        int maxDamage = in.nextInt();
+        String prog = in.next();
+        program = prog.toCharArray();
+        int damage = calculateDamage();
+
+        while (damage > maxDamage) {
+            if (!swap()) return "IMPOSSIBLE";
+            attempt++;
+            damage = calculateDamage();
+        }
+        
+        return attempt + "";
+    }
+
+    private static int calculateDamage () {
         int damage = 0;
         int strength = 1;
 
@@ -68,23 +84,26 @@ public class Solution {
             switch (program[i]) {
             case 'C': {
                 strength *= 2;
+                break;
             }
             case 'S': {
                 damage += strength;
+                break;
             }
             }
         }
         return damage;
     }
 
-    private static void swap (char[] program) {
-        for (int i = program.length - 1; i >= 0; i--) {
-            if (i != 0 && program[i] == 'S' && program[i] == 'C') {
+    private static boolean swap () {
+        for (int i = program.length - 1; i > 0; i--) {
+            if (program[i] == 'S' && program[i - 1] == 'C') {
                 char temp = program[i];
                 program[i] = program[i - 1];
                 program[i - 1] = temp;
-                break;
+                return true;
             }
         }
+        return false;
     }
 }

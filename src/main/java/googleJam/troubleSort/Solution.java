@@ -33,19 +33,39 @@ Sample Case #2 is the second one described in the problem statement. Trouble Sor
 */
 package googleJam.troubleSort;
 
+import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
 public class Solution {
-
-    private static int[] array = { 5, 5, 6, 8, 4, 3, 3 };
-
-    public static void main (String[] args) {
-
-        System.out.println(troubleSort());
+    
+    private static int[] array;
+    
+    public static void main (String[] args) throws FileNotFoundException {
+        //Scanner in = new Scanner(new BufferedReader(new InputStreamReader(System.in)));
+        Scanner in = new Scanner(new BufferedReader(new FileReader("C:/trouble.txt")));
+        int t = in.nextInt(); 
+        
+        for (int i = 1; i <= t; i++) {
+            String result = solution(in);
+            System.out.println("Case #" + i + ": " + result);
+        }
+        in.close();
     }
 
-    public static String troubleSort () {
-        boolean done = false;
+    public static String solution (Scanner in) {
+        int size = in.nextInt();
+        array = new int[size];
+        
+        for (int i = 0; i < size; i++) {
+            array[i] = in.nextInt();
+        }
+        
+        boolean done;
         do {
-            for (int i = 0; i < array.length - 1; i++) {
+            done = true;
+            for (int i = 0; i < array.length - 2; i++) {
                 if (array[i] > array[i + 2]) {
                     swap(i, i + 2);
                     done = false;
@@ -54,7 +74,7 @@ public class Solution {
         } while (!done);
 
         for (int i = 1; i < array.length; i++) {
-            if (array[i] < array[i - 1]) return i + "";
+            if (array[i] < array[i - 1]) return i - 1 + "";
         }
         return "OK";
     }
