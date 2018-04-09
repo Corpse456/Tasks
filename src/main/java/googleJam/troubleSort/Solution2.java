@@ -33,12 +33,14 @@ Sample Case #2 is the second one described in the problem statement. Trouble Sor
 */
 package googleJam.troubleSort;
 
+import java.util.Arrays;
 import java.util.Scanner;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-public class Solution {
+public class Solution2 {
     
     private static int[] array;
     
@@ -64,20 +66,23 @@ public class Solution {
             array[i] = in.nextInt();
         }
         
-        boolean done;
-        do {
-            done = true;
-            for (int i = 0; i < array.length - 2; i++) {
-                if (array[i] > array[i + 2]) {
-                    swap(i, i + 2);
-                    done = false;
-                }
-            }
-        } while (!done);
-
-        for (int i = 1; i < array.length; i++) {
-            if (array[i] < array[i - 1]) return i - 1 + "";
+        int[] even = new int[array.length / 2];
+        int[] odd = new int[array.length - even.length];
+        
+        int count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (i % 2 == 0) odd[count] = array[i];
+            else even[count++] = array[i];
         }
+        
+        Arrays.sort(odd);
+        Arrays.sort(even);
+
+        for (int i = 0; i < odd.length; i++) {
+            if (odd[i] > even[i]) return i*2 + "";
+            if (i != odd.length - 1 && even[i] > odd[i + 1]) return i*2 + 1 + "";
+        }
+        
         return "OK";
     }
 

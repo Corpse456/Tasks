@@ -53,7 +53,7 @@ public class Solution2 {
     public static void main (String[] args) {
         long time = System.currentTimeMillis();
         for (int i = 0; i < 100; i++) {
-            solve(200);
+            solve(20);
         }
         System.out.println((System.currentTimeMillis() - time) / 1000.0);
     }
