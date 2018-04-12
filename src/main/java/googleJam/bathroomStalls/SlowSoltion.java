@@ -50,12 +50,13 @@ public class SlowSoltion {
         int tests = in.nextInt(); 
         
         for (int i = 1; i <= tests; i++) {
-            solve(in);
+            String result = solve(in);
+            System.out.println("Case #" + i + ": " + result);
         }
         in.close();
     }
 
-    private static void solve (Scanner in) {
+    private static String solve (Scanner in) {
         int stalls = in.nextInt();
         int people = in.nextInt();
         
@@ -66,6 +67,7 @@ public class SlowSoltion {
             int max = maximum(stall);
             stall[max] = true;
         }
+        return null;
     }
 
     private static int maximum (boolean[] stall) {
