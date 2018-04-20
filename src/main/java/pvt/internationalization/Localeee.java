@@ -32,6 +32,7 @@ public class Localeee {
 	Date idate = df.parse("17 января 2018 г.");
 	System.out.println(idate);
 	
+	loc = Locale.ENGLISH;
 	ResourceBundle rb = ResourceBundle.getBundle("MessagesBundle", loc);
 	System.out.println(rb.getString("greetings"));
     }
