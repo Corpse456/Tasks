@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
-import fileOperation.ReaderFromFile;
+import workWithFiles.fileIO.ReaderFromFile;
 
 public class Task31_NumbersInText {
 

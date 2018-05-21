@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 
-import fileOperation.ReaderFromFile;
-import fileOperation.WriterToFile;
+import workWithFiles.fileIO.ReaderFromFile;
+import workWithFiles.fileIO.WriterToFile;
 
 public class FrequencyAndDictionary {
 

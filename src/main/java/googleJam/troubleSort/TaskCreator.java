@@ -1,6 +1,6 @@
 package googleJam.troubleSort;
 
-import fileOperation.WriterToFile;
+import workWithFiles.fileIO.WriterToFile;
 
 public class TaskCreator {
 

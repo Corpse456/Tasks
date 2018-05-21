@@ -4,8 +4,8 @@
  */
 package pvt.task30_33.filesWork;
 
-import fileOperation.ReaderFromFile;
-import fileOperation.WriterToFile;
+import workWithFiles.fileIO.ReaderFromFile;
+import workWithFiles.fileIO.WriterToFile;
 
 public class Task32_WriteRead {
     

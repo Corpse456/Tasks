@@ -43,7 +43,7 @@ a = readline_int() // reads 3 into a printline 1 1 to stdout // sends out cell 1
 
 package googleJam.goGopher;
 
-import fileOperation.WriterToFile;
+import workWithFiles.fileIO.WriterToFile;
 
 public class Solution2 {
     

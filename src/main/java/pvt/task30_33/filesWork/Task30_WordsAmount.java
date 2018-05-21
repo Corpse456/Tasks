@@ -4,7 +4,7 @@ package pvt.task30_33.filesWork;
 import java.util.ArrayList;
 import java.util.List;
 
-import fileOperation.ReaderFromFile;
+import workWithFiles.fileIO.ReaderFromFile;
 
 public class Task30_WordsAmount {
 

@@ -1,6 +1,6 @@
 package googleJam.savingUniverse;
 
-import fileOperation.WriterToFile;
+import workWithFiles.fileIO.WriterToFile;
 
 public class TaskCreator {
 
