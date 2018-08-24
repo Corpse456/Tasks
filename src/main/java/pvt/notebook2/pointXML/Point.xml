@@ -2,10 +2,8 @@
 
 <pointsList>
     <point>
-        <unit>
-        	<cm></cm>
-        	<mm></mm>
-        	<px></px>
-        </unit>
+        	<cm>15</cm>
+        	<mm>16</mm>
+        	<px>17</px>
     </point>
 </pointsList>

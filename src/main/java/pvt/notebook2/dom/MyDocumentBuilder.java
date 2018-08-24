@@ -15,7 +15,7 @@ import org.xml.sax.SAXException;
 
 public class MyDocumentBuilder {
 
-    public static void main (String[] args) {
+    public Document docExecutor () {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = null;
         Document doc = null;
@@ -24,7 +24,7 @@ public class MyDocumentBuilder {
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         }
-        File f = new File(MyDocumentBuilder.class.getClassLoader().getResource("config.xml").getPath());
+        File f = new File("src/main/java/pvt/notebook2/pointXML/Point.xml");
         try {
             doc = builder.parse(f);
         } catch (SAXException e) {
@@ -45,5 +45,6 @@ public class MyDocumentBuilder {
                 System.out.println(nList.item(i).getTextContent());
             }
         }
+        return doc;
     }
 }
