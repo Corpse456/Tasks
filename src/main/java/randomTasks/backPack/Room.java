@@ -19,8 +19,10 @@ public class Room {
 
     private int number;
 
+    @ToString.Exclude
     private Usage usage;
 
+    @ToString.Exclude
     private boolean booked;
 
     Room(final int size, final int number) {

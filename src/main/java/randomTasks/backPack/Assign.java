@@ -3,6 +3,7 @@ package randomTasks.backPack;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -22,18 +23,18 @@ public class Assign {
         ALL_USAGES.forEach(Assign::assign);
     }
 
-    private static void assign(final Usage alloc) {
+    private static void assign(final Usage usage) {
         sortedRooms.forEach(r -> r.setBooked(false));
-        if (alloc != null) {
-            registeredUsage.add(alloc);
+        if (usage != null) {
+            registeredUsage.add(usage);
         }
         final List<Usage> usages = new ArrayList<>(registeredUsage);
         usages.sort(Comparator.comparing(Usage::getSize).reversed());
 
         if (!assignAllAllocations(usages)) {
-            System.out.println("!!!!!!!!!!" + alloc + " cannot be approved!!!!!!!!");
+            System.out.println("!!!!!!!!!!" + usage + " cannot be approved!!!!!!!!");
             counter--;
-            usages.remove(alloc);
+            usages.remove(usage);
             sortedRooms.forEach(r -> r.setBooked(false));
             assignAllAllocations(usages);
         }
@@ -42,29 +43,36 @@ public class Assign {
     private static boolean assignAllAllocations(final List<Usage> usages) {
         System.out.println("----------------" + ++counter + "---------------------");
         for (final Usage usage : usages) {
-            findRoom(usage);
+            findRoom(usage, sortedRooms);
             if (usage.getStatus() != Status.OK) {
-                tryToChange(usage, usages);
-                return false;
+                final List<Room> rooms = new ArrayList<>(sortedRooms);
+                rooms.forEach(r -> r.setBooked(false));
+                usages.forEach(u -> u.setRoom(null));
+                Collections.reverse(rooms);
+                tryToChange(usages, rooms);
+                if (usage.getStatus() != Status.OK) {
+                    return false;
+                }
             }
         }
         return true;
     }
 
-    private static void findRoom(final Usage usage) {
+    private static void findRoom(final Usage usage, final List<Room> sortedRooms) {
         for (Room room : sortedRooms) {
             if (room.getSize() >= usage.getSize() && !room.isBooked()) {
                 room.setUsage(usage);
-                System.out.println(usage + " assigned to room #" + room.getNumber());
+                System.out.println(usage + " assigned to room #" + room);
                 return;
             }
         }
         usage.setStatus(Status.NO);
     }
 
-    private static void tryToChange(final Usage usage, final List<Usage> usages) {
-        for (final Usage alloc : usages) {
-//            if (alloc.getRoom() != null && alloc.getRoom().getSize() >= )
+    private static void tryToChange(final List<Usage> usages, final List<Room> rooms) {
+        System.out.println("----------------" + counter + "---------------------");
+        for (final Usage usage : usages) {
+            findRoom(usage, rooms);
         }
     }
 
