@@ -10,7 +10,7 @@ public class Game {
     private Analyzer analyzer;
 
     public Game() {
-        final var numbersLength = 5;
+        final var numbersLength = 4;
         matrix = new Matrix(numbersLength);
         userConsoleService = new UserConsoleService(numbersLength);
         analyzer = new Analyzer(matrix, numbersLength);

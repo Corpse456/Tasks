@@ -22,11 +22,11 @@ public class UserConsoleService {
         return readAnswer("cows");
     }
 
-    public void printGuess(final int nextGuess) {
+    public void printGuess(final String nextGuess) {
         System.out.printf("Your number is %s?%n", nextGuess);
     }
 
-    public void printAnswer(final int answer) {
+    public void printAnswer(final String answer) {
         System.out.println("Your number is: " + answer);
     }
 

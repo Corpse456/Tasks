@@ -11,7 +11,7 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class Matrix {
 
-    private List<Integer> numbers;
+    private List<String> numbers;
 
     private final int numbersLength;
 
@@ -22,11 +22,14 @@ public class Matrix {
         final var from = getFrom();
         final var to = getTo();
         for (int i = from; i < to + 1; i++) {
-            numbers.add(i);
+            final var iAsString = String.valueOf(i);
+            if (withoutRepeats(iAsString) && zeroNotFirst(iAsString)) {
+                numbers.add(iAsString);
+            }
         }
     }
 
-    public int getFirstValue() {
+    public String getFirstValue() {
         return numbers.get(0);
     }
 
@@ -34,12 +37,12 @@ public class Matrix {
         return numbers.size();
     }
 
-    public int getRandomFromMatrix() {
+    public String getRandomFromMatrix() {
         return numbers.get(random.nextInt(numbers.size()));
     }
 
-    public void removeRedundant(final int guess) {
-        final var guessAsChars = String.valueOf(guess).toCharArray();
+    public void removeRedundant(final String guess) {
+        final var guessAsChars = guess.toCharArray();
 
         numbers.removeIf(number -> {
             for (final char c : guessAsChars) {
@@ -51,8 +54,8 @@ public class Matrix {
         });
     }
 
-    public void removeRedundantInPositions(final int guess) {
-        final var guessAsChars = String.valueOf(guess).toCharArray();
+    public void removeRedundantInPositions(final String guess) {
+        final var guessAsChars = guess.toCharArray();
 
         numbers.removeIf(number -> {
             final var numberAsString = String.valueOf(number);
@@ -63,6 +66,19 @@ public class Matrix {
             }
             return false;
         });
+    }
+
+    private static boolean withoutRepeats(final String number) {
+        for (final char c : number.toCharArray()) {
+            if (number.indexOf(c) != number.lastIndexOf(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean zeroNotFirst(final String number) {
+        return number.charAt(0) != '0';
     }
 
     private int getFrom() {
