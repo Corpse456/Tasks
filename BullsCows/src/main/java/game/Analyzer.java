@@ -10,6 +10,8 @@ import java.util.Map;
 @Data
 public class Analyzer {
 
+    private static final int DIGITS_AMOUNT = 10;
+
     private final Matrix matrix;
 
     private final int numbersLength;
@@ -33,6 +35,10 @@ public class Analyzer {
         if (cowsAmount > 0 && bullsAmount == 0) {
             removeRedundantInPositions(nextGuess);
         }
+        if (cowsAmount + bullsAmount == numbersLength) {
+            //TODO remove all digits with is not contains in this guess
+//            removeRedundantInPositions(nextGuess);
+        }
         analyzePreviousGuess();
     }
 
@@ -41,28 +47,25 @@ public class Analyzer {
         for (final UserAnswer previousGuess : previousGuesses) {
             final Map<String, Answer> matchedAnswers = new HashMap<>();
             final var guess = previousGuess.getGuess();
-            for (int i = 0; i < previousGuess.getBullsCows().size(); i++) {
-                for (int j = 0; j < guess.length(); j++) {
-                    putInMatchers(matchedAnswers, previousGuess.getBullsCows().get(i), guess.charAt(j) + "");
-                }
-            }
-
-            for (int i = 0; i < guess.length(); i++) {
-                putInMatchers(matchedAnswers, Answer.BULL, guess.charAt(i) + "");
-                for (int j = 0; j < guess.length(); j++) {
-                    putInMatchers(matchedAnswers, Answer.BULL, guess.charAt(j) + "");
-                    for (int k = 0; k < guess.length(); k++) {
-                        putInMatchers(matchedAnswers, Answer.COW, guess.charAt(k) + "");
-                    }
-                }
-            }
-
+            final var bullsCows = previousGuess.getBullsCows();
+            tryToPutBullsCows(matchedAnswers, bullsCows, guess, 0);
         }
     }
 
-    private void putInMatchers(final Map<String, Answer> matchedAnswers, final Answer bull, final String number) {
+    private void tryToPutBullsCows(final Map<String, Answer> matchedAnswers, final List<Answer> bullsCows,
+            final String guess, final int index) {
+        if (index == bullsCows.size()) {
+            return;
+        }
+        for (int i = 0; i < guess.length(); i++) {
+            putInMatchers(matchedAnswers, bullsCows.get(index), guess.charAt(i) + "");
+            tryToPutBullsCows(matchedAnswers, bullsCows, guess, index + 1);
+        }
+    }
+
+    private void putInMatchers(final Map<String, Answer> matchedAnswers, final Answer answer, final String number) {
         if (!matchedAnswers.containsKey(number)) {
-            matchedAnswers.put(number, bull);
+            matchedAnswers.put(number, answer);
         }
     }
 
@@ -85,11 +88,11 @@ public class Analyzer {
         return matrix.getRandomFromMatrix();
     }
 
-    private static List<List<String>> initializePossibleOptions() {
+    private List<List<String>> initializePossibleOptions() {
         final var list = new ArrayList<List<String>>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < numbersLength; i++) {
             final var integers = new ArrayList<String>();
-            for (int j = 0; j < 10; j++) {
+            for (int j = 0; j < DIGITS_AMOUNT; j++) {
                 integers.add(String.valueOf(j));
             }
             list.add(integers);
