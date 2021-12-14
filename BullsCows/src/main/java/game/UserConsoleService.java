@@ -6,7 +6,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 @Data
-public class UserConsoleService {
+public class UserConsoleService implements UserService {
 
     private final int numbersLength;
 
@@ -14,18 +14,22 @@ public class UserConsoleService {
         this.numbersLength = numbersLength;
     }
 
+    @Override
     public int readBulls() {
         return readAnswer("bulls");
     }
 
+    @Override
     public int readCows() {
         return readAnswer("cows");
     }
 
+    @Override
     public void printGuess(final String nextGuess) {
         System.out.printf("Your number is %s?%n", nextGuess);
     }
 
+    @Override
     public void printAnswer(final String answer) {
         System.out.println("Your number is: " + answer);
     }
