@@ -3,9 +3,11 @@ package game;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Data
 public class Analyzer {
@@ -36,11 +38,11 @@ public class Analyzer {
             removeRedundantInPositions(nextGuess);
         }
         if (cowsAmount + bullsAmount == numbersLength) {
-            //TODO remove all digits with is not contains in this guess
-//            removeRedundantInPositions(nextGuess);
+            removeAllExcept(nextGuess);
         }
         analyzePreviousGuess();
     }
+
 
     private void analyzePreviousGuess() {
         final var currentPossibleOptions = cloneList(possibleOptions);
@@ -75,13 +77,19 @@ public class Analyzer {
             final int finalI = i;
             possibleOptions.get(i).removeIf(number -> number.equals(String.valueOf(nextGuess.charAt(finalI))));
         }
-    }
+}
 
     private void removeRedundant(final String nextGuess) {
         matrix.removeRedundant(nextGuess);
         for (final List<String> possibleOption : possibleOptions) {
             possibleOption.removeIf(nextGuess::contains);
         }
+    }
+
+    private void removeAllExcept(final String nextGuess) {
+        final List<String> digitsList = getDigitsList();
+        digitsList.removeIf(nextGuess::contains);
+        removeRedundant(String.join("", digitsList));
     }
 
     public String getNextGuess() {
@@ -91,13 +99,17 @@ public class Analyzer {
     private List<List<String>> initializePossibleOptions() {
         final var list = new ArrayList<List<String>>();
         for (int i = 0; i < numbersLength; i++) {
-            final var integers = new ArrayList<String>();
-            for (int j = 0; j < DIGITS_AMOUNT; j++) {
-                integers.add(String.valueOf(j));
-            }
-            list.add(integers);
+            list.add(getDigitsList());
         }
         return list;
+    }
+
+    private List<String> getDigitsList() {
+        final var integers = new ArrayList<String>();
+        for (int j = 0; j < DIGITS_AMOUNT; j++) {
+            integers.add(String.valueOf(j));
+        }
+        return integers;
     }
 
     private List<List<String>> cloneList(final List<List<String>> lists) {
