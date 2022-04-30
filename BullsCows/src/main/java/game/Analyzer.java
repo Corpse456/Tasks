@@ -45,22 +45,23 @@ public class Analyzer {
 
 
     private void analyzePreviousGuess() {
-        final var currentPossibleOptions = cloneList(possibleOptions);
         for (final UserAnswer previousGuess : previousGuesses) {
             final Map<String, Answer> matchedAnswers = new HashMap<>();
             final var guess = previousGuess.getGuess();
             final var bullsCows = previousGuess.getBullsCows();
-            tryToPutBullsCows(matchedAnswers, bullsCows, guess, 0);
+            tryToPutBullsCows(possibleOptions, matchedAnswers, bullsCows, guess, 0);
         }
     }
 
-    private void tryToPutBullsCows(final Map<String, Answer> matchedAnswers, final List<Answer> bullsCows,
+    private void tryToPutBullsCows(List<List<String>> possibleOptions, final Map<String, Answer> matchedAnswers, final List<Answer> bullsCows,
             final String guess, final int index) {
+        final var currentPossibleOptions = cloneList(possibleOptions);
         if (index == bullsCows.size()) {
             return;
         }
         for (int i = 0; i < guess.length(); i++) {
             putInMatchers(matchedAnswers, bullsCows.get(index), guess.charAt(i) + "");
+            removeRedundant
             tryToPutBullsCows(matchedAnswers, bullsCows, guess, index + 1);
         }
     }
