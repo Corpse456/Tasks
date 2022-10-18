@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.it-academy.by"
+	xmlns="http://www.it-academy.by" elementFormDefault="qualified">
+	<xs:complexType name="PointsList">
+		<xs:sequence>
+			<xs:element name="point" type="tns:Point" minOccurs="0"
+				maxOccurs="unbounded"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Point">
+		<xs:sequence>
+			<xs:element name="x" type="xs:integer">
+			</xs:element>
+			<xs:element name="y" type="xs:integer">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="pointsList" type="tns:PointsList"></xs:element>
+</schema>

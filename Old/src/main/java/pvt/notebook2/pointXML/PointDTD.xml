@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT pointsList (point*)>
+<!ELEMENT point (x,y)>
+<!ELEMENT x (#PCDATA)>
+<!ELEMENT y (#PCDATA)>
+
+<!ATTLIST point x CDATA #REQUIRED>
+<!ATTLIST point y CDATA #REQUIRED>
