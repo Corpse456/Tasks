@@ -1,4 +1,4 @@
-package leetcode;
+package by.leetcode;
 
 public class BinaryVector {
 
