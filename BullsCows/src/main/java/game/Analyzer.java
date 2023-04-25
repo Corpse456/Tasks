@@ -3,11 +3,9 @@ package game;
 import lombok.Data;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Data
 public class Analyzer {
@@ -55,14 +53,18 @@ public class Analyzer {
 
     private void tryToPutBullsCows(List<List<String>> possibleOptions, final Map<String, Answer> matchedAnswers, final List<Answer> bullsCows,
             final String guess, final int index) {
-        final var currentPossibleOptions = cloneList(possibleOptions);
         if (index == bullsCows.size()) {
             return;
         }
         for (int i = 0; i < guess.length(); i++) {
+            final var currentPossibleOptions = cloneList(possibleOptions);
             putInMatchers(matchedAnswers, bullsCows.get(index), guess.charAt(i) + "");
-            removeRedundant
-            tryToPutBullsCows(matchedAnswers, bullsCows, guess, index + 1);
+            removeRedundant();
+            if (impossiblePosition(currentPossibleOptions)) {
+                removeRedundant(this.possibleOptions);
+                continue;
+            }
+            tryToPutBullsCows(currentPossibleOptions, matchedAnswers, bullsCows, guess, index + 1);
         }
     }
 
