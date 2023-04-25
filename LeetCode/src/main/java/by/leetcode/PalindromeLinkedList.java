@@ -11,8 +11,8 @@ public class PalindromeLinkedList {
             list.add(head.val);
             head = head.next;
         }
-        int begin = 0, end = list.size() - 1;
-        while (begin <= list.size() / 2) {
+        int begin = 0, end = list.size() - 1, halfArray = list.size() / 2;
+        while (begin <= halfArray) {
             if (!list.get(begin++).equals(list.get(end--))) {
                 return false;
             }
