@@ -15,11 +15,14 @@ class BinaryVectorTest {
     @ParameterizedTest
     @MethodSource("arraysWithAnswer")
     void findUnitsSeq(byte[] input, int expectedResult) {
+        // when
         final var result = binaryVector.findUnitsSequential(input);
 
+        // then
         assertEquals(expectedResult, result);
     }
 
+    // given
     private static Stream<Arguments> arraysWithAnswer() {
         return Stream.of(
                 Arguments.of(new byte[] { 1, 1, 0, 1, 1, 1 }, 3),

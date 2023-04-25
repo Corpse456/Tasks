@@ -15,11 +15,14 @@ class AnagramTest {
     @ParameterizedTest
     @MethodSource("wordsWithAnswer")
     void checkStrings(String first, String second, boolean expectedResult) {
+        // when
         final var result = anagram.checkStrings(first, second);
 
+        // then
         assertEquals(expectedResult, result);
     }
 
+    // given
     private static Stream<Arguments> wordsWithAnswer() {
         return Stream.of(
                 Arguments.of("one", "noe", true),

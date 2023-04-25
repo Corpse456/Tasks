@@ -15,11 +15,14 @@ class RomanNumbersTest {
     @ParameterizedTest
     @MethodSource("numbers")
     void convertFromRoman(String romanNumber, int greekNumber) {
+        // when
         final var result = romanNumbers.convertFromRoman(romanNumber);
 
+        // then
         assertEquals(greekNumber, result);
     }
 
+    // given
     private static Stream<Arguments> numbers() {
         return Stream.of(
                 Arguments.of("XV", 15),

@@ -1,5 +1,7 @@
 package by.leetcode;
 
+import lombok.EqualsAndHashCode;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -22,6 +24,7 @@ public class PalindromeLinkedList {
     }
 }
 
+@EqualsAndHashCode
 class ListNode {
 
     int val;

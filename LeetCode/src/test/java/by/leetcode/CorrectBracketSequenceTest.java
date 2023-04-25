@@ -15,11 +15,14 @@ class CorrectBracketSequenceTest {
     @ParameterizedTest
     @MethodSource("numberWithAnswer")
     void writeSequence(int n, String[] expectedResult) {
+        // when
         final var result = sequence.writeSequence(n);
 
+        // then
         assertThat(result).containsExactlyInAnyOrder(expectedResult);
     }
 
+    // given
     private static Stream<Arguments> numberWithAnswer() {
         return Stream.of(
                 Arguments.of(1, new String[] { "()" }),

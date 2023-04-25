@@ -18,9 +18,11 @@ class RichestCustomerWealthTest {
         // when
         final var result = customerWealth.maximumWealth(accounts);
 
+        // then
         assertEquals(expectedWealth, result);
     }
 
+    // given
     private static Stream<Arguments> accounts() {
         return Stream.of(
                 Arguments.of(new int[][] { { 1, 2, 3 }, { 3, 2, 1 } }, 6),

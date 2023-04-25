@@ -15,11 +15,14 @@ class PalindromeLinkedListTest {
     @ParameterizedTest
     @MethodSource("lists")
     void isPalindrome(final ListNode node, boolean expectedResult) {
+        // when
         final var result = palindrome.isPalindrome(node);
 
+        // then
         assertThat(result).isEqualTo(expectedResult);
     }
 
+    // given
     private static Stream<Arguments> lists() {
         return Stream.of(
                 Arguments.of(new ListNode(1, 2), false),
