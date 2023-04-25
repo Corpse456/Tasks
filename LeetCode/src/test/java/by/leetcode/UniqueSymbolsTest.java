@@ -8,15 +8,15 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class UniqueSymbolsTest {
+abstract class UniqueSymbolsTest {
 
-    private final UniqueSymbols uniqueSymbols = new UniqueSymbols();
+    protected abstract UniqueSymbols uniqueSymbols();
 
     @ParameterizedTest
     @MethodSource("symbols")
     void lengthOfLongestSubstring(String string, int expectedResult) {
         // when
-        final var result = uniqueSymbols.lengthOfLongestSubstring(string);
+        final var result = uniqueSymbols().lengthOfLongestSubstring(string);
 
         // then
         assertEquals(expectedResult, result);
@@ -32,5 +32,21 @@ class UniqueSymbolsTest {
                 Arguments.of("zabcazde", 6),
                 Arguments.of("abcdebaabcdefg", 7)
                         );
+    }
+}
+
+class UniqueSymbolsQueTest extends UniqueSymbolsTest {
+
+    @Override
+    protected UniqueSymbols uniqueSymbols() {
+        return new UniqueSymbolsQue();
+    }
+}
+
+class UniqueSymbolsArrayTest extends UniqueSymbolsTest {
+
+    @Override
+    protected UniqueSymbols uniqueSymbols() {
+        return new UniqueSymbolsArray();
     }
 }
