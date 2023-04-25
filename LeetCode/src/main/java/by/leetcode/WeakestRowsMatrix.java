@@ -5,10 +5,10 @@ import java.util.TreeSet;
 public class WeakestRowsMatrix {
 
     public int[] kWeakestRows(int[][] mat, int k) {
-        int rows = mat.length;
+        var rows = mat.length;
 
         var scores = new TreeSet<Integer>();
-        for (int i = 0; i < rows; i++) {
+        for (var i = 0; i < rows; i++) {
             scores.add(countSoldier(mat[i]) * rows + i);
         }
 

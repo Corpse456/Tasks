@@ -1,8 +1,6 @@
 package by.leetcode;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.LinkedList;
 
 /*
 Дана строка, найти длину наибольшей подстроки, состоящей из уникальных символов.
@@ -22,29 +20,16 @@ import java.util.Map;
 public class UniqueSymbols {
 
     public int lengthOfLongestSubstring(String s) {
-        int notExisted = -1;
-        int maxLength = 0;
-        int startIndex = 0;
-        Map<Character, Integer> characterToIndexMap = new HashMap<>();
-        char[] charArray = s.toCharArray();
+        var maxLength = 0;
 
-        for (int i = 0; i < charArray.length; i++) {
-            Integer currentIndex = characterToIndexMap.get(charArray[i]);
-            if (currentIndex != null && currentIndex != notExisted) {
-                maxLength = Math.max(maxLength, characterToIndexMap.size());
-
-                Iterator<Map.Entry<Character, Integer>> entrySet = characterToIndexMap.entrySet().iterator();
-                for (Iterator<Map.Entry<Character, Integer>> it = entrySet; it.hasNext(); ) {
-                    final Map.Entry<Character, Integer> entry = it.next();
-                    if (entry.getValue() <= currentIndex) {
-                        it.remove();
-                    }
-                }
+        var currentList = new LinkedList<>();
+        for (var c : s.toCharArray()) {
+            while (currentList.contains(c)) {
+                currentList.poll();
             }
-
-            characterToIndexMap.put(charArray[i], i);
+            currentList.offer(c);
+            maxLength = Math.max(maxLength, currentList.size());
         }
-        maxLength = Math.max(maxLength, characterToIndexMap.size());
 
         return maxLength;
     }

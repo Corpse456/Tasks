@@ -3,9 +3,9 @@ package by.leetcode;
 public class BinaryVector {
 
     public int findUnitsSequential(byte[] array) {
-        int maxSequential = 0;
-        int currentSequential = 0;
-        for (final byte number : array) {
+        var maxSequential = 0;
+        var currentSequential = 0;
+        for (final var number : array) {
             if (number == 1) {
                 currentSequential++;
             } else {

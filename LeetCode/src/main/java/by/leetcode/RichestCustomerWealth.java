@@ -3,10 +3,10 @@ package by.leetcode;
 public class RichestCustomerWealth {
 
     public int maximumWealth(int[][] accounts) {
-        int maxWealth = 0;
-        for (final int[] account : accounts) {
-            int currentWealth = 0;
-            for (final int i : account) {
+        var maxWealth = 0;
+        for (final var account : accounts) {
+            var currentWealth = 0;
+            for (final var i : account) {
                 currentWealth += i;
             }
             if (currentWealth > maxWealth) {

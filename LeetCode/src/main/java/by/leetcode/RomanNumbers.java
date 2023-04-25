@@ -9,8 +9,9 @@ public class RomanNumbers {
 
     public int convertFromRoman(String romanNumber) {
         final var chars = romanNumber.toCharArray();
-        int result = romanGreeksMap.get(chars[chars.length - 1]);;
-        for (int i = chars.length - 2; i >= 0; i--) {
+        var result = romanGreeksMap.get(chars[chars.length - 1]);
+        ;
+        for (var i = chars.length - 2; i >= 0; i--) {
             final var currentNumber = romanGreeksMap.get(chars[i]);
             if (currentNumber < romanGreeksMap.get(chars[i + 1])) {
                 result -= currentNumber;
